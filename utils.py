@@ -42,6 +42,17 @@ def deserialize_message(message_string):
         print(f"Error decoding JSON message: {e}")
         print(f"Received string: {message_string}")
         return None
+    
+# --- Authentication (very basic for simulation) ---
+VALID_HOST_TOKENS = {"host123"}  # Set of valid host tokens
+VALID_GUEST_TOKENS = {"guest1": "token1", "guest2": "token2", "guest3": "token3"}
+
+def validate_host_token(token):
+    return token in VALID_HOST_TOKENS
+
+def validate_guest_token(guest_id, token):
+    return VALID_GUEST_TOKENS.get(guest_id) == token
+
 
 # --- Example Usage (for testing purposes, you can remove later) ---
 if __name__ == "__main__":

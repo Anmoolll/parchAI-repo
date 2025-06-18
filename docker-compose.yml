@@ -25,6 +25,7 @@ services:
     environment:
       - ROLE=host
       - REDIS_HOST=redis
+      - HOST_TOKEN=host123
     command: python host.py
 
   guest1:
@@ -36,6 +37,7 @@ services:
       - ROLE=guest
       - GUEST_ID=guest1
       - REDIS_HOST=redis
+      - GUEST_TOKEN=token1
     command: python guest.py
 
   guest2:
@@ -47,6 +49,7 @@ services:
       - ROLE=guest
       - GUEST_ID=guest2
       - REDIS_HOST=redis
+      - GUEST_TOKEN=token2
     command: python guest.py
 
   guest3:
@@ -58,4 +61,5 @@ services:
       - ROLE=guest
       - GUEST_ID=guest3
       - REDIS_HOST=redis
+      - GUEST_TOKEN=token3
     command: python guest.py

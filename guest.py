@@ -7,8 +7,19 @@ from utils import (
     get_redis_connection,
     serialize_message,
     deserialize_message,
+    validate_guest_token,
     GUEST_INVITATIONS_STREAM
 )
+
+GUEST_ID = os.getenv("GUEST_ID", "")
+GUEST_TOKEN = os.getenv("GUEST_TOKEN", "")
+if not validate_guest_token(GUEST_ID, GUEST_TOKEN):
+    print(f"[{GUEST_ID}] Invalid or missing GUEST_TOKEN. Exiting.")
+    exit(1)
+
+redis_conn = get_redis_connection()
+print(f"[{GUEST_ID}] Listening for invitations on '{GUEST_INVITATIONS_STREAM}'...")
+
 
 def main():
     redis_conn = get_redis_connection()
