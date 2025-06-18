@@ -1,0 +1,7 @@
+docker run --name my-redis -p 6379:6379 -d redis/redis-stack-server:latest - to run/start the docker
+docker ps - to check the status, should show up...
+docker stop my-redis - to stop the redis container after the work is done.
+docker rm my-redis - to remove the redis
+python utils.py - run the utils file after running the redis.
+docker-compose up --build - to run all at once
+docker-compose down - to stop everything

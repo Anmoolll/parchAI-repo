@@ -1,0 +1,61 @@
+
+
+services:
+  redis:
+    image: redis/redis-stack-server:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  coordinator:
+    build: .
+    container_name: coordinator
+    depends_on:
+      - redis
+    environment:
+      - ROLE=coordinator
+      - REDIS_HOST=redis
+    command: python coordinator.py
+
+  host:
+    build: .
+    container_name: host
+    depends_on:
+      - redis
+    environment:
+      - ROLE=host
+      - REDIS_HOST=redis
+    command: python host.py
+
+  guest1:
+    build: .
+    container_name: guest1
+    depends_on:
+      - redis
+    environment:
+      - ROLE=guest
+      - GUEST_ID=guest1
+      - REDIS_HOST=redis
+    command: python guest.py
+
+  guest2:
+    build: .
+    container_name: guest2
+    depends_on:
+      - redis
+    environment:
+      - ROLE=guest
+      - GUEST_ID=guest2
+      - REDIS_HOST=redis
+    command: python guest.py
+
+  guest3:
+    build: .
+    container_name: guest3
+    depends_on:
+      - redis
+    environment:
+      - ROLE=guest
+      - GUEST_ID=guest3
+      - REDIS_HOST=redis
+    command: python guest.py
